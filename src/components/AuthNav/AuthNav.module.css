@@ -1,0 +1,18 @@
+.link {
+    display: inline-block;
+    text-decoration: none;
+    padding: 12px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 150%;
+    letter-spacing: 0.04em;
+    color: #350c2b;
+}
+
+.link:hover {
+    color: #c26fad;
+}
+
+.link:active {
+    color: #c26fad;
+}

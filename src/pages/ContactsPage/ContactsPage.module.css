@@ -1,0 +1,46 @@
+.container {
+    padding: 0 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.title {
+    width: 290px;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 150%;
+    letter-spacing: 0.04em;
+    color: #81cdf8;
+    margin: 20px 0 0 15px;
+}
+
+.iconBook {
+    width: 28px;
+    height: 28px;
+    margin: 0 5px;
+    color: #81cdf8;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 30px;
+        align-items: flex-start;
+        gap: 45px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .title {
+        width: 260px;
+        margin: 0 auto;
+    }
+}

@@ -12,7 +12,7 @@ const ContactSchema = Yup.object().shape({
     .max(50, 'Too long, max 50 letters!')
     .required('This field is required!'),
   number: Yup.string()
-    .matches(/^(\+\d{1,3}[- ]?)?\d{10}$/, 'Must be a valid phone number with 10 digits')
+    .matches(/^[0-9+()-\s]*$/, 'Invalid phone number')
     .required('This field is required!'),
 });
 

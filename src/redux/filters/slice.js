@@ -2,14 +2,16 @@ import { createSlice, createSelector } from '@reduxjs/toolkit';
 import { selectContacts } from '../contacts/selectors';
 
 
-export const selectNameFilter = (state) => state.filters.name; 
+export const selectFilter = (state) => state.filters.filter; 
 
 // Memoized selector for filtering contacts
 export const selectFilteredContacts = createSelector(
-  [selectContacts, selectNameFilter],
+  [selectContacts, selectFilter], 
   (contacts, filter) => {
+    const lowerCaseFilter = filter.toLowerCase(); 
     return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
+      contact.name.toLowerCase().includes(lowerCaseFilter) || 
+      contact.number.includes(lowerCaseFilter)
     );
   }
 );
@@ -17,14 +19,15 @@ export const selectFilteredContacts = createSelector(
 const filtersSlice = createSlice({
   name: 'filters',
   initialState: {
-    name: '',
+    filter: '',
   },
   reducers: {
     changeFilter: (state, action) => {
-      state.name = action.payload;
+      state.filter = action.payload;
     },
   },
 });
 
 export const { changeFilter } = filtersSlice.actions;
+
 export const filtersReducer = filtersSlice.reducer;

@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { deleteContact } from '../../redux/contacts/operations';
 import css from './Contact.module.css';
 
 export default function Contact({ id, name, number}) {

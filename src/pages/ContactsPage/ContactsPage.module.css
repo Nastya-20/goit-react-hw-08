@@ -1,10 +1,12 @@
 .container {
-    padding: 0 10px;
     display: flex;
     flex-direction: row;
     gap: 20px;
 }
-
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
 .title {
     width: 290px;
     display: flex;
@@ -14,10 +16,18 @@
     font-size: 36px;
     line-height: 150%;
     letter-spacing: 0.04em;
-    color: #81cdf8;
+    color: #80326C;
     margin: 20px 0 0 15px;
 }
-
+h1 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 150%;
+    letter-spacing: 0.04em;
+    color: #f3cfea;
+    margin-bottom: 10px;
+}
 .iconBook {
     width: 28px;
     height: 28px;

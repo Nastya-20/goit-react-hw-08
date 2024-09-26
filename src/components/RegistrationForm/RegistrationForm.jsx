@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { register } from '../../redux/auth/operations';
 import { Field, Formik, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -7,7 +8,6 @@ import css from './RegistrationForm.module.css';
 import { useState } from 'react';
 import axios from 'axios';
 
-// Validation Schema
 const RegisterSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, 'Too short, min 3 letters!')
@@ -23,26 +23,32 @@ const RegisterSchema = Yup.object().shape({
 
 export default function RegistrationForm() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [emailExists, setEmailExists] = useState(false);
 
   const checkEmailExists = async (email) => {
     try {
-      const response = await axios.get(`/users/check-email?email=${email}`);
-      setEmailExists(!response.data.exists); 
+      const response = await axios.post('/api/check-email', { email });
+      setEmailExists(response.data.exists);
     } catch (error) {
       console.error('Error checking email:', error);
     }
   };
 
-  const handleSubmit = (values, { resetForm }) => {
-    dispatch(register(values))
-      .then(() => {
-        toast.success('Registration successful!');
-        resetForm(); 
-      })
-      .catch((error) => {
-        toast.error(`Registration failed: ${error.message}`);
-      });
+  const handleSubmit = async (values, { resetForm, setSubmitting }) => {
+    try {
+      await dispatch(register(values)).unwrap();
+      toast.success('Registration successful!');
+      resetForm();
+      navigate('/contacts');
+    } catch (error) {
+      if (!emailExists) {
+        toast.error(`Registration failed: ${error}`);
+        setEmailExists(true);
+      }
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -74,7 +80,7 @@ export default function RegistrationForm() {
                 onChange={(e) => {
                   const { value } = e.target;
                   setFieldValue('email', value);
-                  checkEmailExists(value); // Check if email exists
+                  checkEmailExists(value);
                 }}
               />
               <ErrorMessage name="email" component="span" className={css.error} />
@@ -96,3 +102,5 @@ export default function RegistrationForm() {
     </Formik>
   );
 }
+
+

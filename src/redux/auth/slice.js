@@ -1,13 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { register, logIn, logOut, refreshUser } from '../auth/operations';
+import { register, logIn, logOut, refreshUser } from './operations';
 
 const initialState = {
   user: { name: null, email: null },
-  token:  localStorage.getItem('token') || null,
+  token: localStorage.getItem('token') || null,
   isLoggedIn: localStorage.getItem('token') !== null,
   isRefreshing: false,
   error: null,
-  
 };
 
 const authSlice = createSlice({
@@ -33,16 +32,17 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         localStorage.setItem('token', action.payload.token);
       })
-        .addCase(logIn.rejected, (state, action) => {
+      .addCase(logIn.rejected, (state, action) => {
         state.error = action.payload;
       })
-      .addCase(logOut.fulfilled, (state) => {
-        state.user = { name: null, email: null };
-        state.token = null;
-        state.isLoggedIn = false;
-        localStorage.removeItem('token');
+      .addCase(logIn.pending, (state) => {
+        state.error = null;
       })
-        .addCase(logOut.rejected, (state, action) => {
+      .addCase(logOut.fulfilled, (state) => {
+        localStorage.removeItem('token');
+        return initialState;
+      })
+      .addCase(logOut.rejected, (state, action) => {
         state.error = action.payload;
       })
       .addCase(refreshUser.pending, (state) => {
@@ -54,10 +54,13 @@ const authSlice = createSlice({
         state.isRefreshing = false;
       })
       .addCase(refreshUser.rejected, (state, action) => {
-         state.error = action.payload;
+        state.error = action.payload;
         state.isRefreshing = false;
       });
   },
 });
 
 export const authReducer = authSlice.reducer;
+
+
+

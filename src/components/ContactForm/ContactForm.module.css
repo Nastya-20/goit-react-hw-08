@@ -1,17 +1,19 @@
 .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background: #faf0f5;
     border: 1px solid #446375;
     box-shadow: 0 15px 15px #2e4857;
     border-radius: 8px;
     padding: 24px;
-    width: 230px;
+    width: 320px;
     min-height: 200px;
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
     letter-spacing: 0.04em;
     color: #2e4857;
-    text-align: center;
 }
 
 .label {
@@ -27,15 +29,13 @@
     background: #fffbfd;
     border: 1px solid #39789c;
     border-radius: 4px;
-    width: 212px;
-    height: 20px;
     padding: 8px 0 8px 16px;
+    width: 280px;
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
     letter-spacing: 0.04em;
     color: #344e5e;
-    margin-top: 5px;
     transition: border-color 0.3s ease;
 }
 
@@ -53,7 +53,7 @@
 .add {
     border-radius: 8px;
     padding: 8px 16px;
-    min-width: 86px;
+    width:  150px;
     height: 40px;
     background: #2d6180;
     box-shadow: 0 8px 15px #2e4857;
@@ -84,9 +84,12 @@
     color: #adb9c0;
 }
 
-.formGroup {
+form > .formGroup {
     position: relative;
-    text-align: left;
+    display: flex;
+    gap: 10px;
+    flex-direction: column ;
+    align-items: flex-start;
     margin-bottom: 20px;
 }
 

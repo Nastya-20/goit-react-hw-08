@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import  RegistrationForm  from '../../components/RegistrationForm/RegistrationForm';
 
 export default function RegistrationPage() {

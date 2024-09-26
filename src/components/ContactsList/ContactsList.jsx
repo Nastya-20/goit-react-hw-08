@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectFilteredContacts } from '../../redux/filters/selectors';
-import { changeFilter } from '../../redux/filters/filtersSlice';
+import { selectContacts } from '../../redux/filters/selectors';
+import { changeFilter } from '../../redux/filters/slice';
 import { deleteContact } from '../../redux/contacts/operations';
 import Contact from '../Contact/Contact';
 import { toast } from 'react-toastify';
@@ -9,7 +9,7 @@ import css from './ContactsList.module.css';
 
 export const ContactsList = () => {
   const dispatch = useDispatch();
-  const filteredContacts = useSelector(selectFilteredContacts);
+  const filteredContacts = useSelector(selectContacts);
 
   const handleFilterChange = (e) => {
     dispatch(changeFilter(e.target.value));

@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet-async';
-import ContactForm from '../../components/ContactForm/ContactForm';
-import ContactsList  from '../../components/ContactsList/ContactsList';
+import {ContactForm} from '../../components/ContactForm/ContactForm';
+import {ContactsList}  from '../../components/ContactsList/ContactsList';
 import { fetchContacts } from '../../redux/contacts/operations';
 import { selectLoading, selectError } from '../../redux/contacts/selectors';
 import Loader from '../../components/Loader/Loader';
@@ -23,7 +23,7 @@ export default function ContacsPage() {
       </Helmet>
       {isLoading && <Loader />} 
       {error && <div>Error fetching contacts: {error}</div>} 
-      <ContactForm/>
+      <ContactForm />
       <ContactsList />
     </>
   );

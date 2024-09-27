@@ -36,18 +36,19 @@ const contactsSlice = createSlice({
         state.items.push(action.payload);
       })
       .addCase(addContact.rejected, handleRejected)
-
-      .addCase(deleteContact.pending, handlePending)
-      .addCase(deleteContact.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
-        const index = state.items.findIndex(
-          (contact) => contact.id === action.payload.id
-        );
-        state.items.splice(index, 1);
+      .addCase(deleteContact.pending, (state) => {
+        state.isLoading = true; 
+        state.error = null; 
       })
-      .addCase(deleteContact.rejected, handleRejected)
-
+      .addCase(deleteContact.fulfilled, (state, action) => {
+        state.isLoading = false; 
+        state.error = null; 
+        state.items = state.items.filter(contact => contact.id !== action.payload);
+      })
+      .addCase(deleteContact.rejected, (state, action) => {
+        state.isLoading = false; 
+        state.error = action.payload || 'Failed to delete contact.'; 
+      })
        .addCase(logOut.fulfilled, (state) => {
         state.items = [];
         state.error = null;

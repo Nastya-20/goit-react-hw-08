@@ -32,3 +32,6 @@ p {
 ul {
   list-style: none;
 }
+button{
+  cursor: pointer;
+}

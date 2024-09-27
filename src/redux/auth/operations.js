@@ -47,14 +47,14 @@ export const logOut = createAsyncThunk(
   'auth/logout',
   async (_, thunkAPI) => {
     try {
-      await axios.post('/users/logout');
-      clearAuthHeader();
       localStorage.removeItem('token');
+      thunkAPI.dispatch(logOut());
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue('Logout failed.');
     }
   }
 );
+
 
 export const refreshUser = createAsyncThunk(
   'auth/refresh',

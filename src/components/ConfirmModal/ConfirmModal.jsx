@@ -8,7 +8,7 @@ import css from './ConfirmModal.module.css';
     <div className={css.overlay}>
       <div className={css.modal}>
         <h2>Confirmation</h2>
-        <p>{message}</p>
+        <p className={css.message}>{message}</p>
         <div className={css.buttons}>
           <button onClick={onConfirm} className={css.confirm}>
             Confirm

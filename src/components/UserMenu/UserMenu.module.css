@@ -18,6 +18,7 @@
     min-width: 86px;
     height: 35px;
     background: #531644;
+    box-shadow: 0 8px 15px #350c2b;
     border: none;
     margin-right: 15px;
     font-family: "Montserrat", "Medium", sans-serif;
@@ -26,10 +27,15 @@
     line-height: 150%;
     letter-spacing: 0.04em;
     color: #fff;
-    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .logout:hover,
 .logout:focus {
     background: #80326c;
+}
+.logout:active {
+    background: #80326c;
+    box-shadow: 0 4px 10px #994f85;
 }

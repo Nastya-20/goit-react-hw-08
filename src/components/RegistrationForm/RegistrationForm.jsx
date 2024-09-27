@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import css from './RegistrationForm.module.css';
 import { useState } from 'react';
+import Loader from '../Loader/Loader';
 import axios from 'axios';
 
 const RegisterSchema = Yup.object().shape({
@@ -37,19 +38,23 @@ export default function RegistrationForm() {
 
   const handleSubmit = async (values, { resetForm, setSubmitting }) => {
     try {
-      await dispatch(register(values)).unwrap();
-      toast.success('Registration successful!');
-      resetForm();
-      navigate('/contacts');
-    } catch (error) {
-      if (!emailExists) {
-        toast.error(`Registration failed: ${error}`);
-        setEmailExists(true);
-      }
-    } finally {
+    await dispatch(register(values)).unwrap();
+    toast.success('Registration successful!');
+    resetForm();
+    navigate('/contacts');
+  } catch (error) {
+    // Перевіряємо, якщо є помилка пов'язана з повторним email
+    if (error.response && error.response.status === 409) {
+      setEmailExists(true);
+      toast.error('Email already registered!');
+    } else {
+      toast.error(`Registration failed: ${error.message}`);
+    }
+  }finally {
       setSubmitting(false);
     }
-  };
+};
+
 
   return (
     <Formik
@@ -95,7 +100,7 @@ export default function RegistrationForm() {
             </label>
           </div>
           <button className={css.register} type="submit" disabled={isSubmitting || emailExists}>
-            {isSubmitting ? 'Registering...' : 'Register'}
+            {isSubmitting ?  <Loader /> : 'Register'}
           </button>
         </Form>
       )}

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { logIn } from '../../redux/auth/operations';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import toast from 'react-hot-toast'; 
+import Loader from '../Loader/Loader';
 import css from './LoginForm.module.css';
 
 const LoginSchema = Yup.object().shape({
@@ -20,11 +20,11 @@ export default function LoginForm() {
   const handleSubmit = async (values, { resetForm, setSubmitting }) => {
     try {
       await dispatch(logIn(values)).unwrap(); 
-      toast.success('Login successful!');
+      console.success('Login successful!');
       resetForm();
       navigate('/contacts');
     } catch (error) {
-      toast.error(`Login failed: Please try again`); 
+      console.error(`Login failed: Please try again`); 
     } finally {
       setSubmitting(false);
     }
@@ -56,7 +56,7 @@ export default function LoginForm() {
             </label>
           </div>
           <button className={css.login} type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Logging In...' : 'Log In'}
+            {isSubmitting ?  <Loader /> : 'Log In'}
           </button>
         </Form>
       )}

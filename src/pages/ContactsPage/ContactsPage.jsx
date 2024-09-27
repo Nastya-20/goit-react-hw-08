@@ -4,10 +4,10 @@ import { Helmet } from 'react-helmet';
 import {ContactForm} from '../../components/ContactForm/ContactForm';
 import {ContactsList}  from '../../components/ContactsList/ContactsList';
 import { fetchContacts } from '../../redux/contacts/operations';
-import SearchBox from '../../components/SearchBox/SearchBox';
+import {SearchBox} from '../../components/SearchBox/SearchBox';
 import css from './ContactsPage.module.css';
 
-export default function ContacsPage() {
+export default function ContactsPage() {
   const dispatch = useDispatch();
  
   useEffect(() => {
@@ -21,8 +21,8 @@ export default function ContacsPage() {
         <title>Your contacts</title>
         </Helmet>
         <h1>Your contacts</h1>
-      <ContactForm />
-      <SearchBox />
+        <ContactForm />
+        <SearchBox />
       </div>
       <ContactsList />
     </div>

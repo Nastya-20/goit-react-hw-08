@@ -5,7 +5,8 @@ import  {Layout}  from './Layout';
 import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
 import { refreshUser } from '../redux/auth/operations';
-import {  selectIsRefreshing } from '../redux/auth/selectors';
+import { selectIsRefreshing } from '../redux/auth/selectors';
+import Loader from './Loader/Loader';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage/'));
 const RegistrationPage = lazy(() => import('../pages/RegistrationPage/RegistrationPage'));
@@ -27,7 +28,7 @@ export const App = () => {
     <b>Refreshing user...</b>
   ) : (
       <Layout>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loader/>}>
          <Routes>
           <Route path="/" element={<HomePage />} />
           <Route

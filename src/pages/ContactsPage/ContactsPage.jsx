@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import {ContactForm} from '../../components/ContactForm/ContactForm';
 import {ContactsList}  from '../../components/ContactsList/ContactsList';
 import { fetchContacts } from '../../redux/contacts/operations';
-import {SearchBox} from '../../components/SearchBox/SearchBox';
+import SearchBox from '../../components/SearchBox/SearchBox';
 import css from './ContactsPage.module.css';
 
 export default function ContactsPage() {

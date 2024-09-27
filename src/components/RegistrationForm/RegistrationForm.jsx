@@ -1,5 +1,4 @@
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { register } from '../../redux/auth/operations';
 import { Field, Formik, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -24,7 +23,6 @@ const RegisterSchema = Yup.object().shape({
 
 export default function RegistrationForm() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [emailExists, setEmailExists] = useState(false);
 
   const checkEmailExists = async (email) => {

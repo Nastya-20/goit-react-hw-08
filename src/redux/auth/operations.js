@@ -47,14 +47,20 @@ export const logOut = createAsyncThunk(
   'auth/logout',
   async (_, thunkAPI) => {
     try {
+      // Відправляємо POST-запит на сервер для виходу
+      await axios.post('/users/logout');
+      // Очищаємо заголовок авторизації
+      clearAuthHeader();
+      // Видаляємо токен з локального сховища
       localStorage.removeItem('token');
-      thunkAPI.dispatch(logOut());
+      toast.success('Logout successful!');
     } catch (error) {
-      return thunkAPI.rejectWithValue('Logout failed.');
+      const errorMessage = error.response?.data?.message || 'Logout failed. Please try again.';
+      toast.error(errorMessage);
+      return thunkAPI.rejectWithValue(errorMessage);
     }
   }
 );
-
 
 export const refreshUser = createAsyncThunk(
   'auth/refresh',
@@ -75,7 +81,6 @@ export const refreshUser = createAsyncThunk(
     }
   }
 );
-
 
 
 

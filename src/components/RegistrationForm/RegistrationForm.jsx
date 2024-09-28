@@ -39,7 +39,6 @@ export default function RegistrationForm() {
     await dispatch(register(values)).unwrap();
     toast.success('Registration successful!');
     resetForm();
-    navigate('/contacts');
   } catch (error) {
     // Перевіряємо, якщо є помилка пов'язана з повторним email
     if (error.response && error.response.status === 409) {
